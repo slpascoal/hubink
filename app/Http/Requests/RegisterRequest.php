@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()],
+            'password' => ['required', Password::defaults()],
         ];
     }
 
@@ -43,11 +43,7 @@ class RegisterRequest extends FormRequest
      */
     public function tryToRegister():bool
     {
-        $user = new User();
-        $user->name = $this->name;
-        $user->password = $this->password;
-        $user->email = $this->email;
-        $user->save();
+        $user = User::query()->create($this->validated());
 
         auth()->login($user);
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('auth')->group(function ()
+Route::middleware('guest')->prefix('auth')->group(function ()
 {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
@@ -16,5 +17,6 @@ Route::prefix('auth')->group(function ()
     Route::post('/register', [RegisterController::class, 'register']);
 });
 
+Route::get('/logout', LogoutController::class)->middleware('auth')->name('logout');
 
 Route::get('/dashboard', fn() => 'dashboard :: '. auth()->id())->middleware('auth')->name('dashboard');

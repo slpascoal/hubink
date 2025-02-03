@@ -17,7 +17,7 @@ class RegisterController extends Controller
     {
         if ($request->tryToRegister())
         {
-            return to_route('dashboard');
+            return redirect('dashboard');
         }
 
         return back()->with(['message', 'Something went wrong']);
