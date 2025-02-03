@@ -13,16 +13,6 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class MakeLoginRequest extends FormRequest
 {
-    public function tryToLogin()
-    {
-        if ($user = User::query()->where('email', $request->email)->first())
-        {
-            if(Hash::check($request->password, $user->password))
-            {
-                auth()->login($user);
-            }
-        }
-    }
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -42,5 +32,24 @@ class MakeLoginRequest extends FormRequest
             'email' => ['required', 'email'],
             'password' => ['required'],
         ];
+    }
+
+    /**
+     * try to login in the system
+     * @return bool
+     */
+    public function tryToLogin():bool
+    {
+        if ($user = User::query()->where('email', $this->email)->first())
+        {
+            if(Hash::check($this->password, $user->password))
+            {
+                auth()->login($user);
+
+                return true;
+            }
+        }
+
+        return false;
     }
 }
