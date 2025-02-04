@@ -23,6 +23,33 @@ class Link extends Model
         'name',
     ];
 
+    public function moveUp()
+    {
+        $this->move(-1);
+    }
+
+    public function moveDown()
+    {
+        $this->move(+1);
+    }
+
+    /**
+     * Function to move the order of links
+     *
+     * @param $to +1 for moving down and -1 for moving up
+     * @return void
+     */
+    private function move($to)
+    {
+        $order = $this->sort;
+        $newOrder = $order + $to;
+
+        $swapWith = $this->user->links()->where('sort', '=', $newOrder)->first();
+
+        $this->fill(['sort' => $newOrder])->save();
+        $swapWith->fill(['sort' => $order])->save();
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
