@@ -18,6 +18,7 @@ class Link extends Model
      */
     protected $fillable = [
         'user_id',
+        'sort',
         'link',
         'name',
     ];

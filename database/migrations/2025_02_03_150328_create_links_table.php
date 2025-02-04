@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('links', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedTinyInteger('sort')->default(0);
             $table->string('link');
             $table->string('name');
             $table->timestamps();
