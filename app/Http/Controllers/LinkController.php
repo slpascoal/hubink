@@ -33,6 +33,12 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
+        if ($link->user->id != auth()->id())
+        {
+            return redirect('/dashboard')->with('message', 'Você não pode alterar esse registro');
+        }
+
+
         return view('links.edit', compact('link'));
     }
 
