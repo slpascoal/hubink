@@ -4,6 +4,7 @@
     <h1>Dashboard</h1>
 
     <h3>Olá {{auth()->user()->name}}</h3>
+    <a href="{{ route('profile') }}">Meu Perfil</a>
 
     @if($message = session()->get('message'))
         <div>{{$message}}</div>

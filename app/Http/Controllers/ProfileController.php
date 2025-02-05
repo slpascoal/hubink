@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function index()
+    {
+        return view('profile', [
+            'user' => auth()->user()
+        ]);
+    }
+
+    public function update(ProfileRequest $request)
     {
         //
     }
+
+
 }
