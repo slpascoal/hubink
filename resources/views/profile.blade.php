@@ -6,7 +6,7 @@
     @if($message = session()->get('message'))
         <div>{{$message}}</div>
     @endif
-<h4>{{$user->description}}</h4>
+
     <div>
         <form action="{{ route('profile') }}" method="post">
             @csrf
