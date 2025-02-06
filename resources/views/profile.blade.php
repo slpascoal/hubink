@@ -3,6 +3,10 @@
 <div>
     <h1>Perfil</h1>
 
+    @if($message = session()->get('message'))
+        <div>{{$message}}</div>
+    @endif
+<h4>{{$user->description}}</h4>
     <div>
         <form action="{{ route('profile') }}" method="post">
             @csrf
@@ -11,24 +15,24 @@
             <div>
                 <input type="text" name="name" placeholder="Nome" value="{{old('name', $user->name)}}" required/>
                 @error('name')
-                <span>{{$message}}</span>
+                    <span>{{$message}}</span>
                 @enderror
             </div>
             <br />
 
             <div>
-                <textarea type="text" name="description" placeholder="Descrição" value="{{old('name', $user->description)}}" required></textarea>
+                <textarea name="description" placeholder="Descrição" required>{{ old('description', $user->description) }}</textarea>
                 @error('description')
-                <span>{{$message}}</span>
+                    <span>{{$message}}</span>
                 @enderror
             </div>
             <br />
 
             <div>
-                <span>hubink.com.br/</span>
-                <input type="text" name="handler" placeholder="@seulink" value="{{old('handler', $user->handler)}}" required />
+                <span>hubink.com.br/@</span>
+                <input type="text" name="handler" placeholder="seulink" value="{{old('handler', $user->handler)}}" required />
                 @error('handler')
-                <span>{{$message}}</span>
+                    <span>{{$message}}</span>
                 @enderror
             </div>
             <br />
