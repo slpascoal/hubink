@@ -4,8 +4,12 @@ namespace App\Http\Requests;
 
 use App\Rules\CheckHandler;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 
+/**
+ * @property-read UploadedFile $photo
+ */
 class ProfileRequest extends FormRequest
 {
     /**
@@ -30,7 +34,8 @@ class ProfileRequest extends FormRequest
                 'required',
                 Rule::unique('users')->ignore($this->user()),
                 new CheckHandler
-            ]
+            ],
+            'photo' => 'nullable|image',
         ];
     }
 }
