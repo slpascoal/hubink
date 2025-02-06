@@ -1,6 +1,6 @@
 <title>Hubink - Dashboard</title>
 
-<div>
+<div class="bg-sky-500">
     <h1>Dashboard</h1>
 
     <h3>Olá {{auth()->user()->name}}</h3>
@@ -45,4 +45,6 @@
             </li>
         @endforeach
     </ul>
+
+    <a href="{{route('logout')}}">Sair</a>
 </div>

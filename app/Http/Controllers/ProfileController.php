@@ -28,6 +28,8 @@ class ProfileController extends Controller
             $data['photo'] = $file->store('photos', 'public');
         }
 
+        $data['handler'] = "@" . $data['handler'];
+
         $user->fill($data)->save();
 
         return back()->with('message', 'Perfil atualizado com sucesso!');

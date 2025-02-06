@@ -39,7 +39,7 @@
 
             <div>
                 <span>hubink.com.br/@</span>
-                <input type="text" name="handler" placeholder="seulink" value="{{old('handler', $user->handler)}}" required />
+                <input type="text" name="handler" placeholder="seulink" value="{{old(substr('handler',1), substr($user->handler, 1))}}" required />
                 @error('handler')
                     <span>{{$message}}</span>
                 @enderror
