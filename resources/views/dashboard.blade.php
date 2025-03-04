@@ -1,4 +1,4 @@
-<x-layout.app class="bg-sky-500">
+<x-layout.app>
     <div>
         <h1>Dashboard</h1>
 
