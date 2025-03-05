@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.bg-zinc-850{
+    background-color: #1e1e21;
+}

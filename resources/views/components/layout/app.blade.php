@@ -6,7 +6,7 @@
     <title>Hubink</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-zinc-950 text-slate-50 h-full">
+<body class="bg-zinc-850 text-slate-50 h-full">
     {{$slot}}
 </body>
 </html>
