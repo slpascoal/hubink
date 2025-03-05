@@ -1,28 +1,14 @@
-<title>Criar um Link</title>
-
-<div>
-    <h1>Criar um Link</h1>
-
-    <div>
-        <form action="{{ route('links.create') }}" method="post">
-            @csrf
-
-            <div>
-                <input type="text" name="link" placeholder="link" value="{{old('link')}}" required/>
-                @error('link')
-                <span>{{$message}}</span>
-                @enderror
-            </div>
-            <br />
-            <div>
-                <input type="text" name="name" placeholder="Nome" value="{{old('name')}}" required/>
-                @error('name')
-                <span>{{$message}}</span>
-                @enderror
-            </div>
-            <br />
-            <a href="{{route('dashboard')}}">Cancelar</a>
-            <button>Salvar</button>
-        </form>
-    </div>
-</div>
+<x-layout.app>
+    <x-container>
+        <x-card title="Criar um Link">
+            <x-form :route="route('links.create')" post id="form">
+                <x-input name="link" placeholder="Link" value="{{old('link')}}" />
+                <x-input name="name" placeholder="Nome" value="{{old('name')}}" />
+            </x-form>
+            <x-slot:actions>
+                <x-a :href="route('dashboard')">Cancelar</x-a>
+                <x-button type="submit" form="form">Salvar</x-button>
+            </x-slot:actions>
+        </x-card>
+    </x-container>
+</x-layout.app>

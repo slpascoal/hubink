@@ -1,53 +1,26 @@
 <x-layout.app>
-    <div>
-        <h1>Perfil</h1>
-
-        @if($message = session()->get('message'))
-            <div>{{$message}}</div>
-        @endif
-
-        <div>
-            <form action="{{ route('profile') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-
-                <div>
-                    <img src="/storage/{{$user->photo}}" alt="Foto de Perfil" width="100px">
-                    <input type="file" name="photo"/>
+    <x-container>
+        <x-card title="Perfil">
+            <x-form :route="route('profile')" put id="form" enctype="multipart/form-data">
+                <div class="flex gap-2 items-center">
+                    <div class="avatar">
+                        <div class="w-24 rounded-xl">
+                            <img src="/storage/{{$user->photo}}" alt="Foto de Perfil" />
+                        </div>
+                    </div>
+                    <x-file-input name="photo"/>
                     @error('photo')
                     <span>{{$message}}</span>
                     @enderror
                 </div>
-                <br />
-
-                <div>
-                    <input type="text" name="name" placeholder="Nome" value="{{old('name', $user->name)}}" required/>
-                    @error('name')
-                    <span>{{$message}}</span>
-                    @enderror
-                </div>
-                <br />
-
-                <div>
-                    <textarea name="description" placeholder="Descrição" required>{{ old('description', $user->description) }}</textarea>
-                    @error('description')
-                    <span>{{$message}}</span>
-                    @enderror
-                </div>
-                <br />
-
-                <div>
-                    <span>hubink.com.br/@</span>
-                    <input type="text" name="handler" placeholder="seulink" value="{{old(substr('handler',1), substr($user->handler, 1))}}" required />
-                    @error('handler')
-                    <span>{{$message}}</span>
-                    @enderror
-                </div>
-                <br />
-
-                <a href="{{route('dashboard')}}">Cancelar</a>
-                <button>Salvar</button>
-            </form>
-        </div>
-    </div>
+                <x-input name="name" placeholder="Nome" value="{{old('name', $user->name)}}" />
+                <x-textarea name="description" placeholder="Descrição" value="{{old('descriptio', $user->description)}}" />
+                <x-input name="handler" prefix="hubink.com.br/@" placeholder="seulink" value="{{old(substr('handler',1), substr($user->handler, 1))}}" />
+            </x-form>
+            <x-slot:actions>
+                <x-a :href="route('dashboard')">Cancelar</x-a>
+                <x-button type="submit" form="form">Salvar</x-button>
+            </x-slot:actions>
+        </x-card>
+    </x-container>
 </x-layout.app>
