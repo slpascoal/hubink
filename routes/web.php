@@ -42,4 +42,4 @@ Route::middleware('auth')->group(function ()
     Route::put('/profile', [ProfileController::class, 'update']);
 });
 
-Route::get('/{user:handler}', HubinkController::class);
+Route::get('/{user:handler}', HubinkController::class)->name('handler');
